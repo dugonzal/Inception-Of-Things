@@ -32,8 +32,9 @@ Vagrant.configure('2') do |config|
     # puts 'network_address :' + nodo[:network_address]
     config.vm.define nodo[:nombre] do |machine|
       machine.vm.hostname = nodo[:nombre]
-      machine.vm.network 'private_network', ip: nodo[:network_address]
+      # machine.vm.network 'private_network', ip: nodo[:network_address]
 
+      config.vm.network 'forwarded_port', guest: 3000, host: 3000
       machine.vm.provider :libvirt do |lv|
         lv.memory = nodo[:memory]
         lv.cpus = nodo[:cpu]
