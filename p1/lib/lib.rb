@@ -9,15 +9,15 @@ def nodes
       nombre: 'dugonzal',
       network_address: '192.168.56.111',
       memory: 2048,
-      cpu: 4
+      cpu: 4,
+      node_type: "agent"
     },
     {
       nombre: 'aalvarez',
       network_address: '192.168.56.112',
       memory: 1024,
-      cpu: 2
+      cpu: 2,
+      node_type: "server"
     }
   ]
 end
-
-puts nodes

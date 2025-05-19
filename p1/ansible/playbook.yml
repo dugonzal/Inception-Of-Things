@@ -1,0 +1,31 @@
+---
+- name: Preparar Alpine Linux para Ansible
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Instalar Python en Alpine (requerido por Ansible)
+      raw: |
+        if ! command -v python3 >/dev/null 2>&1; then
+          apk update && apk add python3 py3-pip
+        fi
+      changed_when: false
+
+- name: Desplegar roles según tipo de nodo
+  hosts: all
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Ejecutar rol server si corresponde
+      include_role:
+        name: server
+      when: node_type == "server"
+
+    - name: Ejecutar rol agent si corresponde
+      include_role:
+        name: agent
+      when: node_type == "agent"
+
+    - name: Mostrar nombre del host
+      ansible.builtin.command: hostname

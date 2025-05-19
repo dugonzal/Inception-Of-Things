@@ -1,0 +1,10 @@
+---
+- name: Instalar K3s en modo servidor
+  ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -
+  args:
+    executable: /bin/sh
+
+- name: Instalar kubectl
+  ansible.builtin.shell: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x kubectl && mv kubectl /usr/bin
+  args:
+    executable: /bin/sh
