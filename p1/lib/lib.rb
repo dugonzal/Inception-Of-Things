@@ -6,14 +6,14 @@
 def nodes
   [
     {
-      nombre: 'dugonzal',
+      name: 'dugonzal',
       network_address: '192.168.56.111',
       memory: 2048,
       cpu: 4,
       node_type: "agent"
     },
     {
-      nombre: 'aalvarez',
+      name: 'aalvarez',
       network_address: '192.168.56.112',
       memory: 1024,
       cpu: 2,
