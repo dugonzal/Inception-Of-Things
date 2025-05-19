@@ -1,0 +1,9 @@
+[
+  {
+    "name": "aalvarez",
+    "hostname": "aalvarezSW",
+    "network_address": "192.168.56.111",
+    "memory": 2048,
+    "cpus": 4
+  }
+]
