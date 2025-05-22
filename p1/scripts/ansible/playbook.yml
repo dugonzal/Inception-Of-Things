@@ -1,6 +1,18 @@
 ---
+- name: Install k3s on servers
+  hosts: servers
+  become: true
+  roles:
+    - server
+
+- name: Install k3s on agents
+  hosts: agents
+  become: true
+  roles:
+    - agent
+
 - name: Install kubectl
-  hosts: aalvarez
+  hosts: all
   become: true
   vars:
     kubectl_version_url: "https://dl.k8s.io/release/stable.txt"
