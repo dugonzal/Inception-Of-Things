@@ -1,12 +1,15 @@
----
 - name: Install k3s on servers
   hosts: servers
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   become: true
   roles:
     - server
 
 - name: Install k3s on agents
   hosts: agents
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   become: true
   roles:
     - agent
