@@ -2,4 +2,4 @@
 .idea
 
 # Vagrant files
-p1/.vagrant
+.vagrant
