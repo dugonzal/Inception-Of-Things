@@ -1,0 +1,8 @@
+---
+- name: Playbook principal
+  hosts: all
+  become: yes
+  roles:
+    - common
+    - server
+    - application

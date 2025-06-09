@@ -1,0 +1,32 @@
+---
+- name: Ensure curl is present
+  become: true
+  package:
+    name: curl
+    state: present
+
+- name: Download latest kubectl binary
+  become: true
+  get_url:
+    url: >-
+      https://dl.k8s.io/release/{{ lookup('ansible.builtin.url', "https://dl.k8s.io/release/stable.txt") | trim }}/bin/linux/amd64/kubectl
+    checksum: >-
+      sha256:https://dl.k8s.io/release/{{ lookup('ansible.builtin.url', "https://dl.k8s.io/release/stable.txt") | trim }}/bin/linux/amd64/kubectl.sha256
+    dest: /usr/local/bin/kubectl
+    mode: '0755'
+    owner: root
+    group: root
+    force: yes
+
+- name: Download and install helm
+  become: true
+  block:
+  - name: Download helm
+    get_url:
+      url: >-
+        https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+      dest: /tmp/get-helm.sh
+      mode: '0700'
+
+  - name: Install helm
+    shell: /tmp/get-helm.sh
