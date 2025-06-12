@@ -8,12 +8,13 @@ require 'json'
 
 class Utils
   def self.validate_conf_vagrant(*args)
-    expected = ['.json', '.ini', '.yml', '.sh']
+    expected = ['.json', '.ini', '.yml', '.sh', '.cfg']
     messages = [
       'Path must be a valid JSON file',
       'Inventory must be an INI file',
       'Playbook must be a YAML file',
-      'Script must be a SH file'
+      'Script must be a SH file',
+      'Ansible Config must be cfg file'
     ]
 
     args.each_with_index do |path, i|

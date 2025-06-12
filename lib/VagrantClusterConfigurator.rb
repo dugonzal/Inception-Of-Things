@@ -9,12 +9,12 @@ class VagrantClusterConfigurator < Utils
   DEFAULT_VERBOSE   = '--verbose'
   DEFAULT_PATH      = 'confs/config.json'
   DEFAULT_SCRIPT    = 'scripts/bootstrap.sh'
+  DEFAULT_CFG = "scripts/ansible.cfg"
   DEFAULT_PLAYBOOK  = 'scripts/ansible/playbook/site.yml'
   DEFAULT_INVENTORY = 'scripts/ansible/inventory/inventory.ini'
-  DEFAULT_ANSIBLE_CFG = "scripts/ansible.cfg"
   attr_reader :nodes, :path, :script, :verbose, :playbook, :inventory, :cfg
 
-  def initialize(path: DEFAULT_PATH, inventory: DEFAULT_INVENTORY, playbook: DEFAULT_PLAYBOOK, script: DEFAULT_SCRIPT, verbose: DEFAULT_VERBOSE, cfg: DEFAULT_ANSIBLE_CFG)
+  def initialize(path: DEFAULT_PATH, inventory: DEFAULT_INVENTORY, playbook: DEFAULT_PLAYBOOK, script: DEFAULT_SCRIPT, verbose: DEFAULT_VERBOSE, cfg: DEFAULT_CFG)
     @nodes     = []
     @path      = path
     @script    = script
@@ -23,7 +23,7 @@ class VagrantClusterConfigurator < Utils
     @inventory = inventory
     @cfg       = cfg
 
-    Utils.validate_conf_vagrant(@path, @inventory, @playbook, @script)
+    Utils.validate_conf_vagrant(@path, @inventory, @playbook, @script, @cfg)
     @nodes = Utils.read_file(@path)
     generate
   end
@@ -47,18 +47,8 @@ class VagrantClusterConfigurator < Utils
     config.vm.define node[:name] do |machine|
       machine.vm.hostname = node[:hostname]
       machine.vm.network 'private_network', ip: node[:network_address]
-      # machine.vm.network :public_network,
-      #   ip: node[:network_address],
-      #   mac: node[:mac_address],
-      #   bridge: "br0",
-      #   dev: "br0",
-      #   mode: "bridge",
-      #   type: "bridge",
-      #   libvirt__network_name: "br0",
-      #   libvirt__forward_mode: "bridge"
  
-      machine.vm.synced_folder 'scripts', '/vagrant/scripts',
-      #type: 'rsync',
+      machine.vm.synced_folder 'scripts', '/inception/scripts', 
       provision_libvirt(machine, node)
       provision_ansible(machine)
     end
