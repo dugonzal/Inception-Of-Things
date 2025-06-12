@@ -1,6 +1,6 @@
 ---
-- name: Playbook principal
-  hosts: all
+- name: Inception of Things
+  hosts: servers
   become: yes
   roles:
     - common

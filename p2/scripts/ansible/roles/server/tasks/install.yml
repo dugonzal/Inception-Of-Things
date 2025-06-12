@@ -1,0 +1,15 @@
+---
+- get_url:
+    url: https://get.k3s.io
+    dest: /tmp/install_k3s.sh
+    mode: "0755"
+    force: no
+
+- name: Bootstrap K3s server
+  shell: |
+    INSTALL_K3S_EXEC="server \
+    --cluster-init --node-ip {{ network_address }}" \
+    sh /tmp/install_k3s.sh
+  args:
+    executable: /bin/sh
+    creates: /usr/local/bin/k3s

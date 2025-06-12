@@ -1,0 +1,4 @@
+---
+- name: Set Networks Address
+  set_fact:
+    network_address: "{{ ansible_default_ipv4.address }}"
