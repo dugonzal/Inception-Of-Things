@@ -14,6 +14,5 @@
 - name: package present
   become: true
   package:
-    name: "{{ item }}"
+    name: "{{ common_packages }}"
     state: present
-  loop: "{{ common_packages }}"
