@@ -1,6 +1,4 @@
-- name: 1) Set vars
-  import_tasks: vars.yml
-- name: 2) Install K3S
+- name: 1) Install K3S
   import_tasks: install.yml
-- name: 3) Config Kube Config
+- name: 2) Config Kube Config
   import_tasks: kube_cfg.yml

@@ -1,1 +1,17 @@
----
+alpine_apk_repositories:
+  - "https://mirrors.edge.kernel.org/alpine/v3.22/main"
+  - "https://mirrors.edge.kernel.org/alpine/v3.22/community"
+
+common_packages:
+  - git
+  - curl
+  - helm
+  - docker
+  - kubectl
+
+update_packages: apk update
+
+docker_daemon:
+  - rc-update add docker default
+  - service docker start
+  - addgroup ${USER} docker

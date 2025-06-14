@@ -11,6 +11,10 @@
     state: present
   loop: "{{ alpine_apk_repositories }}"
 
+- name: "Update package"
+  become: true
+  command: "{{ update_packages }}"
+
 - name: "package present"
   become: true
   package:
@@ -19,5 +23,5 @@
 
 - name: "Config Daemon Docker"
   become: true
-  shell: "{{ item }}"
+  command: "{{ item }}"
   loop: "{{ docker_daemon }}"

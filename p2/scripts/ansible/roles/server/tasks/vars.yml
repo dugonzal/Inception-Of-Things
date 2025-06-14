@@ -1,4 +1,0 @@
----
-- name: Set Networks Address K3s
-  set_fact:
-    network_address: "{{ hostvars[ groups['servers'][0] ].ansible_host }}"
