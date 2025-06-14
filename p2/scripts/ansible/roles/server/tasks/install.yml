@@ -4,7 +4,7 @@
     url: "{{ k3s_install_url }}"
     dest: "{{ k3s_install_script }}"
     mode: "0755"
-    force: no
+    force: "{{ k3s_force }}"
     timeout: "{{ k3s_timeout }}"
   register: k3s_download
   retries: "{{ k3s_retries }}"
