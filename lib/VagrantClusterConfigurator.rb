@@ -46,7 +46,11 @@ class VagrantClusterConfigurator
       machine.vm.hostname = node[:hostname]
       machine.vm.network 'private_network', ip: node[:network_address]
  
-      machine.vm.synced_folder 'scripts', '/inception/scripts', 
+      machine.vm.synced_folder 'scripts', '/inception/scripts',
+        type: 'rsync',
+        rsync__auto: true,      
+        rsync__exclude: '.git/'  
+
       provision_libvirt(machine, node)
       provision_ansible(machine)
     end

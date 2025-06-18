@@ -1,0 +1,32 @@
+---
+- name: "Copy manifests Services"
+  template:
+    src: service.yaml.j2
+    dest: "/tmp/service-{{ app.key }}-.yaml"
+  loop: "{{ apps | dict2items }}"
+  loop_control:
+    loop_var: app
+  vars:
+    cfg: "{{ app.value }}"
+
+- name: "Copy manifests Deployments"
+  template:
+    src: deployment.yaml.j2
+    dest: "/tmp/deployment-{{ app.key }}.yaml"
+  loop: "{{ apps | dict2items }}"
+  loop_control:
+    loop_var: app
+    label: "{{ app.key }}"
+  vars:
+    cfg: "{{ app.value }}"
+
+- name: "Copy manifests Networking"
+  template:
+    src: networking.yaml.j2
+    dest: "/tmp/networking-{{ app.key }}.yaml"
+  loop: "{{ apps | dict2items }}"
+  loop_control:
+    loop_var: app
+    label: "{{ app.key }}"
+  vars:
+    cfg: "{{ app.value }}"

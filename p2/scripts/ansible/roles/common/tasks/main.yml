@@ -21,6 +21,12 @@
     name: "{{ common_packages }}"
     state: present
 
+- name: Install Kubernetes Python client
+  become: true
+  pip:
+    name: kubernetes
+    executable: pip3
+
 - name: "Config Daemon Docker"
   become: true
   command: "{{ item }}"
