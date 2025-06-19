@@ -20,13 +20,20 @@
   vars:
     cfg: "{{ app.value }}"
 
-- name: "Copy manifests Networking"
+- name: "Copy manifests ConfigMaps"
   template:
-    src: networking.yaml.j2
-    dest: "/tmp/networking-{{ app.key }}.yaml"
+    src: configmap.yaml.j2
+    dest: "/tmp/configmap-{{ app.key }}.yaml"
   loop: "{{ apps | dict2items }}"
   loop_control:
     loop_var: app
     label: "{{ app.key }}"
   vars:
     cfg: "{{ app.value }}"
+
+- name: "Copy manifests Networking"
+  template:
+    src: networking.yaml.j2
+    dest: "/tmp/networking.yaml"
+  vars:
+    cfg: "{{ apps }}"

@@ -2,21 +2,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ cfg.name }}-ingress
+  name: inception-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: {{ cfg.ingress_host }}
+{% for app in cfg.values() %}
+    - host: {{ app.ingress_host }}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: {{ cfg.name }}-svc
+                name: {{ app.name }}-svc
                 port:
-                  number: {{ cfg.port }}
+                  number: {{ app.port }}
+{% endfor %}
     - host: ""
       http:
         paths:

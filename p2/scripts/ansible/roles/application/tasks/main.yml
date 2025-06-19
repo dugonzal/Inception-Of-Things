@@ -1,8 +1,13 @@
 ---
 - name: "copy manifest"
   import_tasks: copy_manifest.yaml
-- name: "¡k3s"
-  import_tasks: config_k3s.yaml
+
+- name: "apply manifests"
+  shell: |
+    kubectl apply --kubeconfig=/home/vagrant/.kube/config -f /tmp/
+
+#- name: "¡k3s"
+#  import_tasks: config_k3s.yaml
 # # - name: Sincronizar manifiestos
 # # #   synchronize:
 # #     src: "/"

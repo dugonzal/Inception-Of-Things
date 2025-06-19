@@ -1,5 +1,6 @@
 ---
-apiVersion: apps/v1 kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ cfg.name }}
   labels:
@@ -19,3 +20,14 @@ spec:
           image: {{ cfg.image }}
           ports:
             - containerPort: {{ cfg.port }}
+          volumeMounts:
+            - name: custom-html
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+      volumes:
+        - name: custom-html
+          configMap:
+            name: {{ cfg.name }}-config
+            items:
+              - key: index.html
+                path: index.html

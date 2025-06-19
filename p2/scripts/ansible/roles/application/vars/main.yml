@@ -8,7 +8,7 @@ apps:
   app2:
     name: "app2"
     image: "nginx:latest"
-    replicas: "1"
+    replicas: "3"
     port: "80"
     ingress_host: "app2.com"
   app3:
