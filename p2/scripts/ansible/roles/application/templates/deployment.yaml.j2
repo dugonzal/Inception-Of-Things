@@ -21,13 +21,13 @@ spec:
           ports:
             - containerPort: {{ cfg.port }}
           volumeMounts:
-            - name: custom-html
-              mountPath: /usr/share/nginx/html/index.html
-              subPath: index.html
+            - name: {{ cfg.mount.name }}
+              mountPath: {{ cfg.mount.path }}
+              subPath: {{ cfg.mount.sub_path }}
       volumes:
         - name: custom-html
           configMap:
             name: {{ cfg.name }}-config
             items:
-              - key: index.html
-                path: index.html
+              - key: {{ cfg.mount.sub_path }}
+                path: {{ cfg.mount.sub_path }}

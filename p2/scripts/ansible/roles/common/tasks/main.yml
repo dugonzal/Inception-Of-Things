@@ -11,6 +11,10 @@
     state: present
   loop: "{{ alpine_apk_repositories }}"
 
+- name: "delete tmp"
+  become: true
+  command: "rm -rf /tmp/*"
+
 - name: "Update package"
   become: true
   command: "{{ update_packages }}"
