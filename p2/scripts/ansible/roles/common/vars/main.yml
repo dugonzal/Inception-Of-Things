@@ -1,9 +1,7 @@
 common_packages:
   - git
   - curl
-  #  - helm
   - docker
-#  - kubectl
 
 update_packages: apk update
 
