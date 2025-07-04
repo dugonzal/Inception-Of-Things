@@ -16,11 +16,7 @@ kubectl create namespace argocd
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-git clone https://github.com/dugonzal/dugonzal_ci_di.git /tmp/inception
-
-kubectl apply -n argocd -f /tmp/inception/manifest/application.yaml
-
-sudo rm -rf /tmp/inception
+kubectl apply -n argocd -f manifest/application.yaml
 
 kubectl wait \
   --for=condition=available \
@@ -35,4 +31,3 @@ kubectl -n dev port-forward services/svc-wil42 8888:8888 &
 kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" |
   base64 -d
-echo
