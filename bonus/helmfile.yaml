@@ -1,0 +1,17 @@
+repositories:
+  - name: gitlab
+    url: https://charts.gitlab.io
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+releases:
+  - name: gitlab
+    namespace: gitlab
+    chart: gitlab/gitlab
+    version: 9.1.2
+    values:
+      - values/gitlab.yaml
+
+  - name: argocd
+    namespace: argocd
+    chart: argo/argo-cd

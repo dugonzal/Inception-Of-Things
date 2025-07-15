@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitlab-tls
+  namespace: gitlab
+spec:
+  secretName: gitlab-tls
+  commonName: gitlab.example.com
+  dnsNames:
+    - gitlab.example.com
+  issuerRef:
+    name: my-ca-issuer
+    kind: ClusterIssuer
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  privateKey:
+    algorithm: RSA
+    size: 2048
