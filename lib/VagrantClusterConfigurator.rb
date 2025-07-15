@@ -63,7 +63,7 @@ class VagrantClusterConfigurator
       ansible.verbose        = @verbose
       ansible.playbook       = @playbook
       ansible.inventory_path = @inventory
-      ansible.compatibility_mode = '2.0'
+#      ansible.compatibility_mode = '2.0'
       ansible.become         = true if privileged
     end
   end
